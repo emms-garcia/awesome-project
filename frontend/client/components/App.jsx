@@ -1,0 +1,54 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Router, Route, browserHistory } from 'react-router';
+
+import { fetchUser } from '../actions/account';
+import DashboardPage from './pages/DashboardPage';
+import LoginPage from './pages/LoginPage';
+
+class App extends Component {
+    static propTypes = {
+        fetchUser: React.PropTypes.func.isRequired,
+        loading: React.PropTypes.bool,
+        isAuthenticated: React.PropTypes.bool,
+    }
+
+    componentDidMount () {
+        this.props.fetchUser();
+    }
+
+    render () {
+        if (this.props.loading) {
+            return (
+                <div className='card-panel center-align'></div>
+            );
+        }
+
+        return (
+            <Router history={browserHistory}>
+                <Route path='/dashboard' component={DashboardPage} onEnter={this.handleDashboard.bind(this)} />
+                <Route path='/login' component={LoginPage} onEnter={this.handleLogin.bind(this)}/>
+
+                <Route path='*' onEnter={(nextState, replace) => replace({pathname: '/dashboard'})} />
+            </Router>
+        );
+    }
+
+    handleDashboard (nextState, replace) {
+        if (!this.props.isAuthenticated) {
+            replace({ pathname: '/login' });
+        }
+    }
+
+    handleLogin (nextState, replace) {
+        if (this.props.isAuthenticated) {
+            replace({ pathname: '/dashboard' });
+        }
+    }
+}
+
+const mapStateToProps = ({ account }) => {
+    return { ...account };
+};
+
+export default connect(mapStateToProps, { fetchUser })(App);

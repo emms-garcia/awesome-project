@@ -87,3 +87,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Frontend stuff
+node_modules
+npm-debug.log
+public

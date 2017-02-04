@@ -1,0 +1,36 @@
+version: '2'
+services:
+  backend:
+    build: ./backend
+    command: flask run --host 0.0.0.0 -p 8000
+    container_name: backend
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgres://postgres:@db:5432/postgres
+      - SECRET_KEY=super-secret
+      - FLASK_APP=backend.app
+      - FLASK_DEBUG=1
+    restart: always
+    volumes:
+      - ./backend:/code
+
+  db:
+    container_name: db
+    image: postgres:latest
+
+  frontend:
+    build: ./frontend
+    command: npm start
+    container_name: frontend
+    environment:
+      - NODE_ENV=dev
+    restart: always
+    volumes:
+      - ./frontend:/code
+      - /code/node_modules
+
+  nginx:
+    build: ./nginx/
+    container_name: nginx
+    ports:
+      - "80:80"
+    restart: always
