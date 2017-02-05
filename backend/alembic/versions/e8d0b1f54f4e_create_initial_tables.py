@@ -32,14 +32,21 @@ def upgrade():
     )
 
     op.create_table(
-        'todos',
+        'widgets',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('name', sa.Unicode(128), nullable=False),
-        sa.Column('done', sa.Boolean, server_default=sa.literal(False)),
+        sa.Column('description', sa.Unicode(512), nullable=True),
+        sa.Column('snippet', sa.Text, nullable=False),
+        sa.Column(
+            'metadata',
+            sa.dialects.postgresql.JSON,
+            nullable=True,
+            server_default='{}',
+        ),
         sa.Column('user_id', sa.Integer, sa.ForeignKey('users.id')),
     )
 
 
 def downgrade():
+    op.drop_table('widgets')
     op.drop_table('users')
-    op.drop_table('todos')

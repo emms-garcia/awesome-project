@@ -1,13 +1,13 @@
 from flask_restful import Api
 
 from backend.resources.users import UserIdentityResource, UserListResource
-from backend.resources.todos import TodoDetailResource, TodoListResource
+from backend.resources.widgets import WidgetDetailResource, WidgetListResource
 
 api = Api()
 
-# Todos
-api.add_resource(TodoListResource, '/todos')
-api.add_resource(TodoDetailResource, '/todos/<todo_id>')
+# Widgets
+api.add_resource(WidgetListResource, '/widgets')
+api.add_resource(WidgetDetailResource, '/widgets/<widget_id>')
 
 # Users
 api.add_resource(UserIdentityResource, '/identity')
