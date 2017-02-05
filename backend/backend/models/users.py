@@ -21,7 +21,7 @@ class Users(db.Model):
         db.DateTime, nullable=False, server_default=func.now()
     )
 
-    todos = relationship('Todos', backref="user")
+    todos = relationship('Todos', backref='user')
 
     def __init__(self, *args, **kwargs):
         kwargs['password'] = generate_password_hash(kwargs['password'])

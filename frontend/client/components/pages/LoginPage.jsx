@@ -8,15 +8,15 @@ class LoginPage extends Component {
         return (
             <div>
                 <section className='row'>
-                    <div className='col s12 card-panel teal accent-4'>
-                        <h1 className='white-text'>Frontend</h1>
+                    <div className='col s12 card-panel red lighten-2 center-align'>
+                        <h3 className='white-text'>Awesome Project</h3>
                     </div>
                 </section>
                 <section className='row'>
-                    <div className='col s3 card-panel gray'>
+                    <div className='col s3 card-panel'>
                         <LogInForm />
                     </div>
-                    <div className='col s8 offset-s1 card-panel gray'>
+                    <div className='col s8 offset-s1 card-panel'>
                         <SignInForm />
                     </div>
                 </section>

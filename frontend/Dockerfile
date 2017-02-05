@@ -1,11 +1,11 @@
 FROM node:latest
 
-RUN mkdir /install
-ADD package.json /install/package.json
+RUN mkdir -p /tmp
+ADD package.json /tmp/package.json
 RUN npm config set registry https://registry.npmjs.org/
 RUN npm install -g webpack
-RUN cd /install && npm install
-RUN mkdir -p /code && cp -a /install/node_modules /code
+RUN cd /tmp && npm install
+RUN mkdir -p /code && cp -a /tmp/node_modules /code
 
 WORKDIR /code
 ADD . /code

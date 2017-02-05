@@ -16,12 +16,15 @@ class LogInForm extends Component {
 
     render () {
         const { errorMessages } = this.props;
+        const { username, password } = this.state;
         return (
             <div>
                 <h4 className='center-align teal-text'>Log In</h4>
                 {
                     errorMessages && errorMessages.map((error, idx) => {
-                        return <p className='center-align red-text' key={idx}>{error}</p>;
+                        return (
+                            <p className='center-align red-text' key={idx}>{error}</p>
+                        );
                     })
                 }
                 <form className='col s12' onSubmit={this.onSubmit.bind()}>
@@ -29,9 +32,9 @@ class LogInForm extends Component {
                         <div className='col s12'>
                             <Input
                                 label='Username'
-                                type='email'
                                 onChange={this.inputChanged.bind(this, 'username')}
-                                value={this.state.username}
+                                type='email'
+                                value={username}
                             />
                         </div>
                     </div>
@@ -39,14 +42,17 @@ class LogInForm extends Component {
                         <div className='col s12'>
                             <Input
                                 label='Password'
-                                type='password'
                                 onChange={this.inputChanged.bind(this, 'password')}
-                                value={this.state.password}
+                                type='password'
+                                value={password}
                             />
                         </div>
                     </div>
                     <div className="row center-align">
-                        <Button onClick={this.onSubmit.bind(this)}>Log In</Button>
+                        <Button
+                            className='waves-effect waves-light btn btn-large'
+                            onClick={this.onSubmit.bind(this)}
+                        >Log In</Button>
                     </div>
                 </form>
             </div>

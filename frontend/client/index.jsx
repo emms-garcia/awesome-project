@@ -1,6 +1,4 @@
-// Materialize.css styles
 import 'styles/main.scss';
-import 'materialize-loader';
 
 import React from 'react';
 import { render } from 'react-dom';

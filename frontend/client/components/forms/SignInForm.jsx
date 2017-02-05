@@ -64,7 +64,10 @@ class SignInForm extends Component {
                         </div>
                     </div>
                     <div className="row center-align">
-                        <Button onClick={this.onSubmit.bind(this)}>Sign In</Button>
+                        <Button
+                            className='waves-effect waves-light btn btn-large'
+                            onClick={this.onSubmit.bind(this)}
+                        >Sign In</Button>
                     </div>
                 </form>
             </div>

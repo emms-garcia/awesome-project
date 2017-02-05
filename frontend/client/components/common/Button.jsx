@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Button = ({ children, onClick }) => {
+const Button = ({ className, children, onClick }) => {
     return (
         <button
-            className='waves-effect waves-light btn btn-large'
+            className={className}
             onClick={onClick}
             type='button'
         >
@@ -13,6 +13,7 @@ const Button = ({ children, onClick }) => {
 };
 
 Button.propTypes = {
+    className: React.PropTypes.string,
     onClick: React.PropTypes.func,
 };
 

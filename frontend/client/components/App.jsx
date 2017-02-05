@@ -5,6 +5,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import { fetchUser } from '../actions/account';
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
+import WidgetLibraryPage from './pages/WidgetLibraryPage';
 
 class App extends Component {
     static propTypes = {
@@ -19,30 +20,29 @@ class App extends Component {
 
     render () {
         if (this.props.loading) {
-            return (
-                <div className='card-panel center-align'></div>
-            );
+            return <noscript />;
         }
 
         return (
             <Router history={browserHistory}>
-                <Route path='/dashboard' component={DashboardPage} onEnter={this.handleDashboard.bind(this)} />
                 <Route path='/login' component={LoginPage} onEnter={this.handleLogin.bind(this)}/>
+                <Route path='/dashboard' component={DashboardPage} onEnter={this.requiresAuth.bind(this)} />
+                <Route path='/library' component={WidgetLibraryPage} onEnter={this.requiresAuth.bind(this)} />
 
                 <Route path='*' onEnter={(nextState, replace) => replace({pathname: '/dashboard'})} />
             </Router>
         );
     }
 
-    handleDashboard (nextState, replace) {
-        if (!this.props.isAuthenticated) {
-            replace({ pathname: '/login' });
-        }
-    }
-
     handleLogin (nextState, replace) {
         if (this.props.isAuthenticated) {
             replace({ pathname: '/dashboard' });
+        }
+    }
+
+    requiresAuth (nextState, replace) {
+        if (!this.props.isAuthenticated) {
+            replace({ pathname: '/login' });
         }
     }
 }

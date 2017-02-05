@@ -5,7 +5,7 @@ import { browserHistory, Link } from 'react-router';
 import Button from '../common/Button';
 import Page from './Page';
 
-class DashboardPage extends Component {
+class WidgetLibraryPage extends Component {
     static propTypes = {
     };
 
@@ -17,34 +17,29 @@ class DashboardPage extends Component {
             <Button
                 className='btn btn-large red-text white'
                 key='0'
-                onClick={() => browserHistory.push('/widgets')}
+                onClick={() => browserHistory.push('/library/new')}
             >
-                Add Widget
+                Create Widget
             </Button>
         ];
 
         return (
-            <Page buttons={buttons} header='Dashboard'>
+            <Page buttons={buttons} header='Widget Library'>
                 <div className='row'>
-                    { this.renderWidgetGrid() }
+                    { this.renderWidgetLibrary() }
                 </div>
             </Page>
         );
     }
 
-    renderWidgetGrid () {
+    renderWidgetLibrary () {
         return (
             <div className='col s12 center-align'>
                 <h3>Nothing here yet :(</h3>
                 <ul>
                     <li>
                         <h4>
-                            Go to the <Link to='/library'>Widget Library</Link> and add some Widgets.
-                        </h4>
-                    </li>
-                    <li>
-                        <h4>
-                        Create a <Link to='/library/new'> new Widget yourself.</Link>
+                        <Link to='/library/new'>Create a new Widget</Link> and share it with the community!
                         </h4>
                     </li>
                 </ul>
@@ -57,4 +52,4 @@ const mapStateToProps = ({}) => {
     return {};
 };
 
-export default connect(mapStateToProps)(DashboardPage);
+export default connect(mapStateToProps)(WidgetLibraryPage);
